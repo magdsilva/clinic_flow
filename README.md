@@ -4,7 +4,7 @@ API REST desenvolvida em Node.js com TypeScript para gerenciamento de prontuári
 
 A aplicação permite cadastrar e gerenciar pacientes, realizar agendamentos, registrar observações durante consultas e consultar o histórico de atendimentos.
 
-O projeto foi desenvolvido como parte do desafio técnico da Afya, priorizando organização em camadas, validação dos dados, autenticação, testes, documentação da API e deploy em ambiente cloud.
+O projeto foi desenvolvido com o intuíto de didático, priorizando organização em camadas, validação dos dados, autenticação, testes, documentação da API e deploy em ambiente cloud.
 
 ## Tecnologias
 
@@ -120,11 +120,6 @@ https://localhost:3000
 
 A aplicação está hospedada no Render, utilizando um Web Service para a API e PostgreSQL gerenciado para persistência dos dados.
 
-### Ambiente publicado
-
-- API: https://desafio-afya-api-zjwb.onrender.com
-- Swagger: https://desafio-afya-api-zjwb.onrender.com/docs
-
 ### Arquitetura em cloud
 
 ```text
@@ -155,7 +150,7 @@ Exemplo de requisição:
 
 ```json
 {
-  "email": "user_teste@afya.com",
+  "email": "user_teste@teste.com",
   "password": "123456"
 }
 ```
@@ -167,12 +162,6 @@ Authorization: Bearer <token>
 ```
 
 ## Documentação da API
-
-A documentação OpenAPI/Swagger está disponível no ambiente publicado:
-
-```text
-https://desafio-afya-api-zjwb.onrender.com/docs
-```
 
 Para execução local:
 
