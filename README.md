@@ -1,4 +1,4 @@
-# Sistema de agendamentos médico
+# Sistema de agendamentos clinicos
 
 API REST desenvolvida em Node.js com TypeScript para gerenciamento de prontuários, pacientes e consultas médicas.
 
