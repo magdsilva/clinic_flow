@@ -5,8 +5,8 @@ const schema = Joi.object({
     .uuid()
     .required(),
 
-  date: Joi.string()
-    .pattern(/^\d{4}-\d{2}-\d{2}$/)
+  date: Joi.date()
+    .iso()
     .required(),
 
   time: Joi.string()
@@ -15,7 +15,10 @@ const schema = Joi.object({
 })
 
 const validate = (data: unknown) => {
-  return schema.validate(data)
+  return schema.validate(data, {
+    convert: false,
+    abortEarly: false
+  })
 }
 
 export { validate }
