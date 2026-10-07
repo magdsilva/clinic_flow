@@ -1,8 +1,8 @@
 import Joi from 'joi'
 
 const schema = Joi.object({
-  date: Joi.string()
-    .pattern(/^\d{4}-\d{2}-\d{2}$/),
+  date: Joi.date()
+    .iso(),
 
   time: Joi.string()
     .pattern(/^([01]\d|2[0-3]):[0-5]\d$/),
@@ -16,7 +16,10 @@ const appointmentIdSchema = Joi.string()
   .required()
 
 const validate = (data: unknown) => {
-  return schema.validate(data)
+  return schema.validate(data, {
+    convert: false,
+    abortEarly: false
+  })
 }
 
 const validateAppointmentId = (id: unknown) => {

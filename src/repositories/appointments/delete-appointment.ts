@@ -6,9 +6,14 @@ const deleteAppointment = async (
 ): Promise<boolean> => {
   const result = await database.query(
     `
-      DELETE FROM appointments
+      UPDATE appointments
+      SET
+        deleted_at = NOW(),
+        updated_at = NOW()
       WHERE id = $1
         AND user_id = $2
+        AND deleted_at IS NULL
+        AND status <> 'COMPLETED'
     `,
     [
       id,

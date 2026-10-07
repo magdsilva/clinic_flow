@@ -29,12 +29,18 @@ const createAppointmentController = async (
     })
   }
 
-  const { appointment, conflict } = await createAppointment({
+  const { appointment, conflict, pastSchedule } = await createAppointment({
     userId: request.userId as string,
     patientId: value.patientId,
     date: value.date,
     time: value.time
   })
+
+  if (pastSchedule) {
+    return response.status(400).json({
+      message: 'Appointment cannot be scheduled in the past'
+    })
+  }
 
   if (conflict) {
     logger.warn({

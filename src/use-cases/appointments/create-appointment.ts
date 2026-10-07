@@ -12,6 +12,7 @@ import { getAppointmentBySchedule } from '../../repositories/appointments/get-ap
 interface CreateAppointmentResult {
   appointment: Appointment | null
   conflict: boolean
+  pastSchedule: boolean
 }
 
 const createAppointment = async (
@@ -22,11 +23,20 @@ const createAppointment = async (
   if (!patient) {
     return {
       appointment: null,
-      conflict: false
+      conflict: false,
+      pastSchedule: false
     }
   }
 
   const scheduledAt = `${data.date}T${data.time}:00`
+
+  if (new Date(scheduledAt).getTime() <= Date.now()) {
+    return {
+      appointment: null,
+      conflict: false,
+      pastSchedule: true
+    }
+  }
 
   const scheduleConflict = await getAppointmentBySchedule(
     data.userId,
@@ -36,7 +46,8 @@ const createAppointment = async (
   if (scheduleConflict) {
     return {
       appointment: null,
-      conflict: true
+      conflict: true,
+      pastSchedule: false
     }
   }
 
@@ -49,13 +60,15 @@ const createAppointment = async (
   if (!appointment) {
     return {
       appointment: null,
-      conflict: true
+      conflict: true,
+      pastSchedule: false
     }
   }
 
   return {
     appointment,
-    conflict: false
+    conflict: false,
+    pastSchedule: false
   }
 }
 
